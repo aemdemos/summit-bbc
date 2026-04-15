@@ -1,0 +1,121 @@
+/* Full-width wrapper override */
+.news-list-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* news-list block */
+.news-list {
+  --news-bg: #f9f9f9;
+  --news-text: #1d252c;
+  --news-link: #000;
+  --news-btn-bg: #0046be;
+  --news-btn-text: #e0e6ef;
+  --news-gap: 20px;
+  --news-padding: 40px 24px;
+
+  background: var(--news-bg);
+  color: var(--news-text);
+  padding: var(--news-padding);
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: var(--heading-font-family, sans-serif);
+}
+
+/* Header row: title + button */
+.news-list > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #c5cbd5;
+}
+
+.news-list > div:first-child h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--news-text);
+}
+
+/* View More button styling */
+main .news-list > div:first-child a.button:any-link {
+  display: inline-block;
+  background: var(--news-btn-bg);
+  color: var(--news-btn-text);
+  border-radius: 3px;
+  padding: 6px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .news-list > div:first-child a.button:any-link:hover {
+  color: #fff;
+}
+
+/* Hide original rows (replaced by JS-generated grid) */
+.news-list > div:not(:first-child):not(.news-grid) {
+  display: none;
+}
+
+.news-list .news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--news-gap);
+  margin-top: 20px;
+}
+
+.news-list .news-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-list .news-card picture {
+  display: block;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.news-list .news-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  transition: filter 0.3s ease;
+}
+
+.news-list .news-card:hover img {
+  filter: brightness(1.1);
+}
+
+.news-list .news-card h4 {
+  margin: 12px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.news-list .news-card h4 a {
+  color: var(--news-link);
+  text-decoration: none;
+}
+
+.news-list .news-card h4 a:hover {
+  text-decoration: underline;
+}
+
+@media (width < 900px) {
+  .news-list .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width < 600px) {
+  .news-list .news-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,238 @@
+/* People Cards Block */
+.people-cards-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.people-cards {
+  --big-card-bg: #1d252c;
+  --big-card-heading: #fff200;
+  --big-card-text: #e0e6ef;
+  --small-card-1-bg: #001e73;
+  --small-card-2-bg: #0046be;
+  --small-card-4-bg: #ececec;
+  --card-heading-light: #e0e6ef;
+  --card-heading-dark: #000;
+  --link-yellow: #fff200;
+
+  padding: 0;
+}
+
+/* Override section margin for full-bleed */
+main > .section:has(.people-cards) {
+  margin: 0;
+}
+
+/* Row 1: Big featured card (2-column: text + image) */
+.people-cards > div:first-child {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 420px;
+  margin-bottom: 0;
+}
+
+/* Big card - text cell */
+.people-cards > div:first-child > div:first-child {
+  background: var(--big-card-bg);
+  padding: 80px 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.people-cards > div:first-child > div:first-child h2 {
+  font-size: 42px;
+  color: var(--big-card-heading);
+  margin: 0 0 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.people-cards > div:first-child > div:first-child h2 a {
+  color: var(--big-card-heading);
+  border-bottom: 1px solid var(--big-card-heading);
+  text-decoration: none;
+}
+
+.people-cards > div:first-child > div:first-child p {
+  color: var(--big-card-text);
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+main .people-cards > div:first-child > div:first-child p:last-child a:any-link {
+  color: var(--big-card-heading);
+  border: 1px solid var(--big-card-heading);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 24px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Big card - image cell */
+.people-cards > div:first-child > div:last-child {
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.people-cards > div:first-child > div:last-child picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.people-cards > div:first-child > div:last-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Row 2: Small cards (4-column grid) */
+.people-cards > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 350px;
+  margin-top: 0;
+}
+
+/* Small card shared styles */
+.people-cards > div:nth-child(2) > div {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 250px;
+}
+
+/* Card 1: dark navy */
+.people-cards > div:nth-child(2) > div:nth-child(1) {
+  background: var(--small-card-1-bg);
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(1) h3 {
+  color: var(--card-heading-light);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  margin: 0 0 16px;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(1) h3 a {
+  color: var(--card-heading-light);
+  text-decoration: none;
+}
+
+main .people-cards > div:nth-child(2) > div:nth-child(1) p a:any-link {
+  color: var(--link-yellow);
+  border-bottom: 2px solid var(--link-yellow);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Card 2: blue */
+.people-cards > div:nth-child(2) > div:nth-child(2) {
+  background: var(--small-card-2-bg);
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(2) h3 {
+  color: var(--card-heading-light);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(2) h3 a {
+  color: var(--card-heading-light);
+  text-decoration: none;
+}
+
+main .people-cards > div:nth-child(2) > div:nth-child(2) p a:any-link {
+  color: var(--link-yellow);
+  border-bottom: 2px solid var(--link-yellow);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Card 3: image card */
+.people-cards > div:nth-child(2) > div:nth-child(3) {
+  padding: 0;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(3) picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(3) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card 4: light gray (Careers) */
+.people-cards > div:nth-child(2) > div:nth-child(4) {
+  background: var(--small-card-4-bg);
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(4) h3 {
+  color: var(--card-heading-dark);
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(4) h3 a {
+  color: var(--card-heading-dark);
+  border-bottom: 1px solid var(--card-heading-dark);
+  text-decoration: none;
+}
+
+.people-cards > div:nth-child(2) > div:nth-child(4) p {
+  color: var(--card-heading-dark);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+main .people-cards > div:nth-child(2) > div:nth-child(4) p a:any-link {
+  color: var(--card-heading-dark);
+  background: var(--link-yellow);
+  border: none;
+  border-radius: 0;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Desktop layout */
+@media (width >= 900px) {
+  .people-cards > div:first-child {
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+  }
+
+  .people-cards > div:first-child > div:first-child {
+    padding: 130px 90px 90px;
+  }
+
+  .people-cards > div:first-child > div:first-child h2 {
+    font-size: 49px;
+  }
+
+  .people-cards > div:nth-child(2) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    min-height: 430px;
+  }
+}

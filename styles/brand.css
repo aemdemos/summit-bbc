@@ -1,0 +1,15 @@
+:root {
+  --heading-font-family: "Montserrat", "HumanBBYDigital-Medium", sans-serif;
+  --body-font-family: "Source Sans Pro", "HumanBBYDigital-Regular", sans-serif;
+  --background-color: rgb(240, 243, 242);
+  --text-color: rgb(0, 0, 0);
+  --link-color: rgb(0, 70, 190);
+  --link-hover-color: rgb(42, 100, 150);
+  --section-padding: 0px;
+  --nav-height: 109px;
+  --brand-blue: rgb(0, 70, 190);
+  --brand-teal: rgb(0, 154, 135);
+  --brand-light-gray: rgb(249, 249, 249);
+}
+
+html, body { overflow: auto !important; }

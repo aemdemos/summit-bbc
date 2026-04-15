@@ -1,0 +1,257 @@
+/* Community Block */
+.community {
+  --community-blue: #0046be;
+  --community-yellow: #ffe000;
+  --community-light: #e0e6ef;
+  --community-dark: #1d252c;
+  --community-black: #000;
+
+  padding: 0;
+}
+
+/* Full-width override */
+.community-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Header row (row 1) */
+.community > div:first-child {
+  text-align: center;
+  padding: 40px 24px 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.community > div:first-child h5 {
+  display: inline-block;
+  background: var(--community-blue);
+  color: #fff;
+  font-family: var(--heading-font-family, sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 18px;
+  border-radius: 3px;
+  margin: 0 0 16px;
+}
+
+.community > div:first-child h2 {
+  font-family: var(--body-font-family, sans-serif);
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--community-dark);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Card rows (rows 2-4) — grid layout */
+.community > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+  max-width: 100%;
+}
+
+.community > div:nth-child(2) > div:first-child {
+  overflow: hidden;
+}
+
+.community > div:nth-child(2) > div:first-child picture {
+  display: block;
+  height: 100%;
+}
+
+.community > div:nth-child(2) > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Blue text panel (Social Impact) */
+.community > div:nth-child(2) > div:last-child {
+  background: var(--community-blue);
+  padding: 60px 70px 40px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.community > div:nth-child(2) > div:last-child h3 {
+  font-size: 49px;
+  font-weight: 400;
+  margin: 0 0 30px;
+  line-height: 1.2;
+}
+
+.community > div:nth-child(2) > div:last-child h3 a {
+  color: var(--community-light);
+  text-decoration: none;
+  border-bottom: 1px solid var(--community-light);
+}
+
+.community > div:nth-child(2) > div:last-child p {
+  color: var(--community-light);
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+/* Learn more link in blue card — style the <a> directly (no .button class) */
+.community > div:nth-child(2) > div:last-child p:last-child a {
+  display: inline-block;
+  background: transparent;
+  border: 3px solid var(--community-yellow);
+  border-radius: 3px;
+  color: var(--community-yellow);
+  font-size: 19px;
+  font-weight: 700;
+  padding: 8px 25px;
+  text-decoration: none;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.community > div:nth-child(2) > div:last-child p:last-child a:hover {
+  background: var(--community-yellow);
+  color: var(--community-blue);
+}
+
+/* Small cards row (Environmental Sustainability & Human Rights) */
+.community > div:nth-child(3),
+.community > div:nth-child(4) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.community > div:nth-child(3) > div:first-child,
+.community > div:nth-child(4) > div:first-child {
+  overflow: hidden;
+}
+
+.community > div:nth-child(3) > div:first-child picture,
+.community > div:nth-child(4) > div:first-child picture {
+  display: block;
+  height: 100%;
+}
+
+.community > div:nth-child(3) > div:first-child img,
+.community > div:nth-child(4) > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Yellow text panels */
+.community > div:nth-child(3) > div:last-child,
+.community > div:nth-child(4) > div:last-child {
+  background: var(--community-yellow);
+  padding: 70px 80px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.community > div:nth-child(3) > div:last-child h4,
+.community > div:nth-child(4) > div:last-child h4 {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--community-black);
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.community > div:nth-child(3) > div:last-child h4 a,
+.community > div:nth-child(4) > div:last-child h4 a {
+  color: var(--community-black);
+  text-decoration: none;
+}
+
+.community > div:nth-child(3) > div:last-child p,
+.community > div:nth-child(4) > div:last-child p {
+  color: var(--community-black);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 15px;
+}
+
+/* Learn more button in yellow cards — style the <a> directly */
+.community > div:nth-child(3) > div:last-child p:last-child a,
+.community > div:nth-child(4) > div:last-child p:last-child a {
+  display: inline-block;
+  background: var(--community-black);
+  border: none;
+  border-radius: 3px;
+  color: var(--community-light);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 17px;
+  text-decoration: none;
+  text-align: center;
+  margin: 0;
+  width: fit-content;
+  line-height: 1.4;
+}
+
+/* Desktop: small cards side by side */
+@media (width >= 900px) {
+  .community {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .community > div:first-child {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .community > div:nth-child(2) {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .community > div:nth-child(3),
+  .community > div:nth-child(4) {
+    width: 50%;
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    min-height: 400px;
+  }
+}
+
+/* Mobile */
+@media (width < 900px) {
+  .community > div:nth-child(2) {
+    grid-template-columns: 1fr;
+  }
+
+  .community > div:nth-child(2) > div:first-child {
+    min-height: 250px;
+  }
+
+  .community > div:nth-child(2) > div:last-child {
+    padding: 40px 30px;
+  }
+
+  .community > div:nth-child(2) > div:last-child h3 {
+    font-size: 32px;
+  }
+
+  .community > div:nth-child(3),
+  .community > div:nth-child(4) {
+    grid-template-columns: 1fr;
+  }
+
+  .community > div:nth-child(3) > div:first-child,
+  .community > div:nth-child(4) > div:first-child {
+    min-height: 200px;
+  }
+
+  .community > div:nth-child(3) > div:last-child,
+  .community > div:nth-child(4) > div:last-child {
+    padding: 40px 30px;
+  }
+}

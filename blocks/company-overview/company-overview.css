@@ -1,0 +1,204 @@
+/* Company Overview Block */
+.company-overview {
+  --co-blue: #0046be;
+  --co-dark: #1d252c;
+  --co-bg: #f9f9f9;
+  --co-gradient: linear-gradient(45deg, #009a87 0%, #0046be 100%);
+}
+
+.company-overview-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Row 1: Tag + Heading */
+.company-overview > div:first-child {
+  text-align: center;
+  padding: 60px 24px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.company-overview .tag {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--co-blue);
+  text-transform: capitalize;
+  margin: 0 0 20px;
+}
+
+.company-overview > div:first-child h2 {
+  font-size: 40px;
+  color: var(--co-dark);
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 600;
+}
+
+.company-overview .dot {
+  color: var(--co-blue);
+}
+
+/* Row 2: Storefront image + Featured card */
+.company-overview > div:nth-child(2) {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.company-overview > div:nth-child(2)::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: -50vw;
+  right: -50vw;
+  height: 260px;
+  background: var(--co-gradient);
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.company-overview > div:nth-child(2) > div {
+  position: relative;
+  z-index: 1;
+}
+
+.company-overview > div:nth-child(2) > div:first-child {
+  overflow: hidden;
+}
+
+.company-overview > div:nth-child(2) > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Featured card (About Best Buy) */
+.company-overview > div:nth-child(2) > div:last-child {
+  background: var(--co-bg);
+  padding: 35px 30px;
+}
+
+.company-overview > div:nth-child(2) > div:last-child h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--co-dark);
+  margin: 0 0 12px;
+}
+
+.company-overview > div:nth-child(2) > div:last-child h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.company-overview > div:nth-child(2) > div:last-child p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.company-overview > div:nth-child(2) > div:last-child p:last-child a {
+  display: inline-block;
+  background: #000;
+  color: #e0e6ef;
+  padding: 6px 20px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+/* Row 3: Three quickfinder cards */
+.company-overview > div:nth-child(3) {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--co-bg);
+}
+
+.company-overview > div:nth-child(3) > div {
+  padding: 35px 25px 40px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.company-overview > div:nth-child(3) h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--co-dark);
+  margin: 0 0 8px;
+}
+
+.company-overview > div:nth-child(3) h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.company-overview > div:nth-child(3) p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.company-overview > div:nth-child(3) p:last-child a {
+  display: inline-block;
+  background: #000;
+  color: #e0e6ef;
+  padding: 6px 20px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+/* Desktop layout */
+@media (width >= 900px) {
+  .company-overview > div:first-child {
+    padding: 100px 24px 40px;
+  }
+
+  .company-overview > div:first-child h2 {
+    font-size: 50px;
+  }
+
+  .company-overview > div:nth-child(2) {
+    display: flex;
+    gap: 0;
+    margin-top: 80px;
+    align-items: stretch;
+  }
+
+  .company-overview > div:nth-child(2) > div:first-child {
+    flex: 1;
+    min-height: 400px;
+  }
+
+  .company-overview > div:nth-child(2) > div:first-child img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .company-overview > div:nth-child(2) > div:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 35px 30px 35px 55px;
+  }
+
+  .company-overview > div:nth-child(3) {
+    display: flex;
+  }
+
+  .company-overview > div:nth-child(3) > div {
+    flex: 1;
+    border-top: none;
+    border-left: 1px solid #e0e0e0;
+  }
+
+  .company-overview > div:nth-child(3) > div:first-child {
+    border-left: none;
+  }
+}

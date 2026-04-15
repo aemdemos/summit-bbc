@@ -1,0 +1,55 @@
+/* Purpose Statement Block */
+.purpose-statement {
+  --block-bg: rgba(0, 70, 190, 0.85);
+  --block-text: #e0e6ef;
+  --block-highlight: #fff000;
+  --block-padding-y: 200px;
+
+  background: var(--block-bg);
+  color: var(--block-text);
+  padding: var(--block-padding-y) 0;
+}
+
+.purpose-statement-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+main > .section:has(.purpose-statement) {
+  margin: 0;
+}
+
+.purpose-statement > div > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.purpose-statement h2 {
+  font-family: var(--body-font-family, sans-serif);
+  font-size: 70px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  color: var(--block-text);
+  margin: 0;
+}
+
+.purpose-statement h2 span {
+  color: var(--block-highlight);
+  font-style: normal;
+}
+
+@media (width < 900px) {
+  .purpose-statement {
+    --block-padding-y: 80px;
+  }
+
+  .purpose-statement h2 {
+    font-size: 40px;
+  }
+
+  .purpose-statement > div > div {
+    padding: 0 24px;
+  }
+}

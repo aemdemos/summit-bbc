@@ -1,39 +1,118 @@
-@import url('./hero-tokens.css');
+/* Hero block — full-width two-column layout */
 
-.hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
+.hero-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+main > .section.hero-container {
+  margin-top: 0;
 }
 
 .hero {
-  position: relative;
-  padding: var(--hero-padding);
-  min-height: var(--hero-min-height);
+  --hero-gradient: linear-gradient(45deg, rgb(0, 154, 135) 0%, rgb(0, 70, 190) 100%);
+  --hero-text: #e0e6ef;
+  --hero-btn-color: #fff000;
+  --hero-padding: 30px 20px;
+  --hero-img-bg: #e8ebe5;
 }
 
-.hero h1 {
-  max-width: var(--hero-heading-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Row = two-column layout on desktop */
+.hero > div {
+  display: flex;
+  flex-direction: column;
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+/* Image cell */
+.hero > div > div:first-child {
+  overflow: hidden;
+  line-height: 0;
+  background-color: var(--hero-img-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero img {
-  object-fit: cover;
+.hero > div > div:first-child picture {
+  display: block;
   width: 100%;
   height: 100%;
 }
 
+.hero > div > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text cell */
+.hero > div > div:last-child {
+  background: var(--hero-gradient);
+  color: var(--hero-text);
+  padding: var(--hero-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero > div > div:last-child h2 {
+  font-family: var(--heading-font-family, sans-serif);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--hero-text);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.hero > div > div:last-child p {
+  color: var(--hero-text);
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+
+/* CTA button — secondary (em-wrapped) */
+main .hero a.button.secondary:any-link {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid var(--hero-btn-color);
+  border-radius: 3px;
+  color: var(--hero-btn-color);
+  padding: 8px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+main .hero a.button.secondary:any-link:hover {
+  background-color: var(--hero-btn-color);
+  color: #0046be;
+}
+
 @media (width >= 900px) {
-  .hero {
-    padding: var(--hero-padding-desktop);
+  .hero > div {
+    flex-direction: row;
+    min-height: 460px;
+  }
+
+  .hero > div > div:first-child {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .hero > div > div:last-child {
+    flex: 1 1 50%;
+    min-width: 0;
+    padding: 40px 40px;
+  }
+
+  .hero > div > div:last-child h2 {
+    font-size: 28px;
   }
 }

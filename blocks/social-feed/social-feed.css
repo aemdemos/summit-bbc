@@ -1,0 +1,101 @@
+/* social-feed block */
+.social-feed {
+  --sf-dark-bg: #1d252c;
+  --sf-follow-color: #fff200;
+  --sf-link-color: #e0e6ef;
+  --sf-link-size: 80px;
+  --sf-follow-size: 24px;
+  --sf-padding: 100px;
+}
+
+.social-feed-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.social-feed-wrapper.social-feed-wrapper {
+  margin-bottom: 0;
+}
+
+.social-feed > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-feed > div > div:first-child {
+  background: var(--sf-dark-bg);
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.social-feed > div > div:last-child {
+  flex: 1;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.social-feed > div > div:last-child picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.social-feed > div > div:last-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.social-feed h3 {
+  color: var(--sf-follow-color);
+  font-size: var(--sf-follow-size);
+  font-weight: 800;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.social-feed p {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.social-feed p + p {
+  margin-top: 8px;
+}
+
+main .social-feed a:any-link {
+  color: var(--sf-link-color);
+  font-size: var(--sf-link-size);
+  font-weight: 800;
+  font-family: var(--heading-font-family, sans-serif);
+  text-decoration: none;
+  line-height: 1.1;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+
+main .social-feed a:hover {
+  color: var(--sf-follow-color);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .social-feed > div {
+    flex-direction: row;
+    max-height: 458px;
+  }
+
+  .social-feed > div > div:first-child {
+    flex: 0 0 50%;
+    padding: 100px 70px 100px 100px;
+  }
+
+  .social-feed > div > div:last-child {
+    flex: 0 0 50%;
+    min-height: auto;
+  }
+}
