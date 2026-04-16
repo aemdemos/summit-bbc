@@ -25,3 +25,59 @@ footer .section > div {
   max-width: 100%;
   padding: 0;
 }
+
+footer .footer > div > div {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 21px;
+}
+
+footer .footer .footer-socials {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+footer .footer .footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+footer .footer .footer-socials a:hover {
+  opacity: 0.7;
+}
+
+footer .footer .footer-socials svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+
+footer .footer .footer-copyright {
+  text-align: left;
+  color: #fff;
+  font-family: var(--body-font-family);
+}
+
+footer .footer .footer-copyright p {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+@media (width >= 900px) {
+  footer .footer > div > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  footer .footer .footer-socials {
+    margin-bottom: 0;
+  }
+}

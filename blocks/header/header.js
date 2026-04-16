@@ -1,5 +1,44 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, loadSections } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { decorateMain } from '../../scripts/scripts.js';
+
+/**
+ * Loads a fragment, falling back to full HTML parsing for local dev.
+ * @param {string} path The fragment path
+ * @returns {Promise<HTMLElement>} The fragment main element
+ */
+async function loadNavFragment(path) {
+  // try standard fragment loading first
+  const fragment = await loadFragment(path);
+  if (fragment) return fragment;
+
+  // fallback: fetch full HTML page and extract main content (local dev)
+  const resp = await fetch(path);
+  if (resp.ok) {
+    const html = await resp.text();
+    const main = document.createElement('main');
+    // parse into an inert document via iframe srcdoc to avoid XXE
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.srcdoc = html;
+    document.body.append(iframe);
+    await new Promise((resolve) => { iframe.addEventListener('load', resolve); });
+    const sourceMain = iframe.contentDocument.querySelector('main');
+    if (sourceMain) {
+      const maxNodes = 200;
+      let count = 0;
+      while (sourceMain.firstChild && count < maxNodes) {
+        main.append(sourceMain.firstChild);
+        count += 1;
+      }
+    }
+    iframe.remove();
+    decorateMain(main);
+    await loadSections(main);
+    return main;
+  }
+  return null;
+}
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -109,14 +148,76 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Organizes mega-menu dropdown items into columns based on section headers.
+ * Items with href="#" that have no nested content are treated as column headings.
+ * @param {Element} navSections The nav sections element
+ */
+function decorateMegaMenu(navSections) {
+  navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navItem) => {
+    const subList = navItem.querySelector('ul');
+    if (!subList) return;
+
+    let colIndex = 0;
+    [...subList.children].forEach((li) => {
+      const link = li.querySelector('a');
+      if (!link) return;
+
+      // Items linking to "#" with no sub-list are section headings
+      const isHeading = link.getAttribute('href') === '#' && !li.querySelector('ul');
+      if (isHeading) {
+        colIndex += 1;
+        li.classList.add('mega-heading', 'mega-col-start');
+      }
+      li.setAttribute('data-col', String(colIndex));
+    });
+  });
+}
+
+/**
+ * Replaces the search text link with an SVG search icon
+ * @param {Element} navTools The nav tools element
+ */
+function decorateSearchIcon(navTools) {
+  if (!navTools) return;
+  const searchLink = navTools.querySelector('a');
+  if (!searchLink) return;
+
+  const icon = document.createElement('span');
+  icon.className = 'search-icon';
+  icon.setAttribute('aria-label', 'Search');
+  /* eslint-disable browser-security/detect-mixed-content, browser-security/no-http-urls -- W3C SVG namespace */
+  const svgNs = 'http://www.w3.org/2000/svg';
+  /* eslint-enable browser-security/detect-mixed-content, browser-security/no-http-urls */
+  const svg = document.createElementNS(svgNs, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  const circle = document.createElementNS(svgNs, 'circle');
+  circle.setAttribute('cx', '11');
+  circle.setAttribute('cy', '11');
+  circle.setAttribute('r', '7');
+  const line = document.createElementNS(svgNs, 'line');
+  line.setAttribute('x1', '16.5');
+  line.setAttribute('y1', '16.5');
+  line.setAttribute('x2', '21');
+  line.setAttribute('y2', '21');
+  svg.append(circle, line);
+  icon.append(svg);
+  searchLink.textContent = '';
+  searchLink.appendChild(icon);
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // load nav as fragment — prefer local content on localhost
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  let navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  if (!navMeta && window.location.hostname === 'localhost') {
+    const localResp = await fetch('/content/nav');
+    if (localResp.ok) navPath = '/content/nav';
+  }
+  const fragment = await loadNavFragment(navPath);
 
   // decorate nav DOM
   block.textContent = '';
@@ -149,7 +250,14 @@ export default async function decorate(block) {
         }
       });
     });
+
+    // organize mega-menu columns
+    decorateMegaMenu(navSections);
   }
+
+  // decorate search icon in tools
+  const navTools = nav.querySelector('.nav-tools');
+  decorateSearchIcon(navTools);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
