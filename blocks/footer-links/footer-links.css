@@ -1,6 +1,6 @@
 .footer-links {
   --footer-bg: #0046be;
-  --footer-text: #ffffff;
+  --footer-text: #fff;
   --footer-padding: 40px 0;
 
   background: var(--footer-bg);
@@ -60,6 +60,7 @@
 }
 
 main .footer-links .button-container { display: inline; }
+
 main .footer-links a.button:any-link {
   background: none;
   border: none;

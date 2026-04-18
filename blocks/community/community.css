@@ -10,67 +10,40 @@
 }
 
 /* Full-width override */
-.community-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
+main > .section > .community-wrapper {
+  max-width: 100%;
+  padding: 0;
 }
 
-/* Header row (row 1) */
+.community > div > div > p {
+  margin-top: 0;
+}
+
+/* Row 1: Social Impact (big card — image + blue text panel) */
 .community > div:first-child {
-  text-align: center;
-  padding: 40px 24px 30px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.community > div:first-child h5 {
-  display: inline-block;
-  background: var(--community-blue);
-  color: #fff;
-  font-family: var(--heading-font-family, sans-serif);
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 6px 18px;
-  border-radius: 3px;
-  margin: 0 0 16px;
-}
-
-.community > div:first-child h2 {
-  font-family: var(--body-font-family, sans-serif);
-  font-size: 40px;
-  font-weight: 400;
-  color: var(--community-dark);
-  margin: 0;
-  line-height: 1.3;
-}
-
-/* Card rows (rows 2-4) — grid layout */
-.community > div:nth-child(2) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 500px;
   max-width: 100%;
 }
 
-.community > div:nth-child(2) > div:first-child {
+.community > div:first-child > div:first-child {
   overflow: hidden;
 }
 
-.community > div:nth-child(2) > div:first-child picture {
+.community > div:first-child > div:first-child picture {
   display: block;
   height: 100%;
 }
 
-.community > div:nth-child(2) > div:first-child img {
+.community > div:first-child > div:first-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 /* Blue text panel (Social Impact) */
-.community > div:nth-child(2) > div:last-child {
+.community > div:first-child > div:last-child {
   background: var(--community-blue);
   padding: 60px 70px 40px 100px;
   display: flex;
@@ -78,28 +51,28 @@
   justify-content: center;
 }
 
-.community > div:nth-child(2) > div:last-child h3 {
+.community > div:first-child > div:last-child h3 {
   font-size: 49px;
   font-weight: 400;
   margin: 0 0 30px;
   line-height: 1.2;
 }
 
-.community > div:nth-child(2) > div:last-child h3 a {
+.community > div:first-child > div:last-child h3 a {
   color: var(--community-light);
   text-decoration: none;
   border-bottom: 1px solid var(--community-light);
 }
 
-.community > div:nth-child(2) > div:last-child p {
+.community > div:first-child > div:last-child p {
   color: var(--community-light);
   font-size: 18px;
   line-height: 1.6;
   margin: 0 0 20px;
 }
 
-/* Learn more link in blue card — style the <a> directly (no .button class) */
-.community > div:nth-child(2) > div:last-child p:last-child a {
+/* Learn more link in blue card */
+.community > div:first-child > div:last-child p:last-child a {
   display: inline-block;
   background: transparent;
   border: 3px solid var(--community-yellow);
@@ -113,39 +86,39 @@
   line-height: 1.4;
 }
 
-.community > div:nth-child(2) > div:last-child p:last-child a:hover {
+.community > div:first-child > div:last-child p:last-child a:hover {
   background: var(--community-yellow);
   color: var(--community-blue);
 }
 
-/* Small cards row (Environmental Sustainability & Human Rights) */
-.community > div:nth-child(3),
-.community > div:nth-child(4) {
+/* Rows 2-3: Small cards (Environmental Sustainability & Human Rights) */
+.community > div:nth-child(2),
+.community > div:nth-child(3) {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.community > div:nth-child(3) > div:first-child,
-.community > div:nth-child(4) > div:first-child {
+.community > div:nth-child(2) > div:first-child,
+.community > div:nth-child(3) > div:first-child {
   overflow: hidden;
 }
 
-.community > div:nth-child(3) > div:first-child picture,
-.community > div:nth-child(4) > div:first-child picture {
+.community > div:nth-child(2) > div:first-child picture,
+.community > div:nth-child(3) > div:first-child picture {
   display: block;
   height: 100%;
 }
 
-.community > div:nth-child(3) > div:first-child img,
-.community > div:nth-child(4) > div:first-child img {
+.community > div:nth-child(2) > div:first-child img,
+.community > div:nth-child(3) > div:first-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 /* Yellow text panels */
-.community > div:nth-child(3) > div:last-child,
-.community > div:nth-child(4) > div:last-child {
+.community > div:nth-child(2) > div:last-child,
+.community > div:nth-child(3) > div:last-child {
   background: var(--community-yellow);
   padding: 70px 80px 50px;
   display: flex;
@@ -153,32 +126,33 @@
   justify-content: center;
 }
 
-.community > div:nth-child(3) > div:last-child h4,
-.community > div:nth-child(4) > div:last-child h4 {
-  font-size: 32px;
-  font-weight: 400;
+.community > div:nth-child(2) > div:last-child h4,
+.community > div:nth-child(3) > div:last-child h4 {
+  font-size: 24px;
+  font-weight: 800;
   color: var(--community-black);
   margin: 0 0 20px;
   line-height: 1.2;
 }
 
-.community > div:nth-child(3) > div:last-child h4 a,
-.community > div:nth-child(4) > div:last-child h4 a {
+.community > div:nth-child(2) > div:last-child h4 a,
+.community > div:nth-child(3) > div:last-child h4 a {
   color: var(--community-black);
   text-decoration: none;
+  border-bottom: 1px solid #1d252c;
 }
 
-.community > div:nth-child(3) > div:last-child p,
-.community > div:nth-child(4) > div:last-child p {
+.community > div:nth-child(2) > div:last-child p,
+.community > div:nth-child(3) > div:last-child p {
   color: var(--community-black);
   font-size: 16px;
   line-height: 1.6;
-  margin: 0 0 15px;
+  margin: 0 0 40px;
 }
 
-/* Learn more button in yellow cards — style the <a> directly */
-.community > div:nth-child(3) > div:last-child p:last-child a,
-.community > div:nth-child(4) > div:last-child p:last-child a {
+/* Learn more button in yellow cards */
+.community > div:nth-child(2) > div:last-child p:last-child a,
+.community > div:nth-child(3) > div:last-child p:last-child a {
   display: inline-block;
   background: var(--community-black);
   border: none;
@@ -208,13 +182,8 @@
     flex: 0 0 100%;
   }
 
-  .community > div:nth-child(2) {
-    width: 100%;
-    flex: 0 0 100%;
-  }
-
-  .community > div:nth-child(3),
-  .community > div:nth-child(4) {
+  .community > div:nth-child(2),
+  .community > div:nth-child(3) {
     width: 50%;
     flex: 0 0 50%;
     box-sizing: border-box;
@@ -224,34 +193,34 @@
 
 /* Mobile */
 @media (width < 900px) {
-  .community > div:nth-child(2) {
+  .community > div:first-child {
     grid-template-columns: 1fr;
   }
 
-  .community > div:nth-child(2) > div:first-child {
+  .community > div:first-child > div:first-child {
     min-height: 250px;
   }
 
-  .community > div:nth-child(2) > div:last-child {
+  .community > div:first-child > div:last-child {
     padding: 40px 30px;
   }
 
-  .community > div:nth-child(2) > div:last-child h3 {
+  .community > div:first-child > div:last-child h3 {
     font-size: 32px;
   }
 
-  .community > div:nth-child(3),
-  .community > div:nth-child(4) {
+  .community > div:nth-child(2),
+  .community > div:nth-child(3) {
     grid-template-columns: 1fr;
   }
 
-  .community > div:nth-child(3) > div:first-child,
-  .community > div:nth-child(4) > div:first-child {
+  .community > div:nth-child(2) > div:first-child,
+  .community > div:nth-child(3) > div:first-child {
     min-height: 200px;
   }
 
-  .community > div:nth-child(3) > div:last-child,
-  .community > div:nth-child(4) > div:last-child {
+  .community > div:nth-child(2) > div:last-child,
+  .community > div:nth-child(3) > div:last-child {
     padding: 40px 30px;
   }
 }

@@ -83,6 +83,7 @@ function createSocialIcon(name) {
   };
 
   if (!Object.hasOwn(paths, name)) return null;
+  // eslint-disable-next-line secure-coding/detect-object-injection
   path.setAttribute('d', paths[name]);
   svg.append(path);
   return svg;
@@ -107,7 +108,10 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  // find social links section and copyright section
+  // build a single inner container for copyright (left) + socials (right)
+  const inner = document.createElement('div');
+  inner.className = 'footer-inner';
+
   const sections = footer.querySelectorAll('.section');
   sections.forEach((section) => {
     const links = section.querySelectorAll('a');
@@ -115,7 +119,7 @@ export default async function decorate(block) {
       && section.textContent.trim() === [...links].map((a) => a.textContent.trim()).join('');
 
     if (hasOnlyLinks) {
-      // social links section
+      // social links
       const socialsDiv = document.createElement('div');
       socialsDiv.className = 'footer-socials';
       links.forEach((link) => {
@@ -130,13 +134,31 @@ export default async function decorate(block) {
         }
         socialsDiv.append(link);
       });
-      section.textContent = '';
-      section.append(socialsDiv);
+      inner.append(socialsDiv);
     } else {
-      // copyright section
-      section.classList.add('footer-copyright');
+      // copyright
+      const copyrightDiv = document.createElement('div');
+      copyrightDiv.className = 'footer-copyright';
+      while (section.firstChild) copyrightDiv.append(section.firstChild);
+      inner.append(copyrightDiv);
     }
   });
 
-  block.append(footer);
+  block.textContent = '';
+  block.append(inner);
+
+  // Back-to-top button
+  const scrollTop = document.createElement('a');
+  scrollTop.href = '#';
+  scrollTop.className = 'scroll-top-button';
+  scrollTop.setAttribute('aria-label', 'Back to top');
+  scrollTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.body.append(scrollTop);
+
+  window.addEventListener('scroll', () => {
+    scrollTop.classList.toggle('visible', window.scrollY > 300);
+  });
 }

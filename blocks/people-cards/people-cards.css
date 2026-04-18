@@ -1,38 +1,56 @@
 /* People Cards Block */
-.people-cards-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
+main > .section > .people-cards-wrapper {
+  max-width: 100%;
+  padding: 0;
 }
 
 .people-cards {
   --big-card-bg: #1d252c;
   --big-card-heading: #fff200;
   --big-card-text: #e0e6ef;
-  --small-card-1-bg: #001e73;
-  --small-card-2-bg: #0046be;
-  --small-card-4-bg: #ececec;
-  --card-heading-light: #e0e6ef;
-  --card-heading-dark: #000;
+  --card-navy: #001e73;
+  --card-blue: #0046be;
+  --card-gray: #ececec;
+  --card-light-text: #e0e6ef;
+  --card-dark-text: #000;
   --link-yellow: #fff200;
 
   padding: 0;
 }
 
-/* Override section margin for full-bleed */
 main > .section:has(.people-cards) {
   margin: 0;
 }
 
-/* Row 1: Big featured card (2-column: text + image) */
-.people-cards > div:first-child {
+/* ul container */
+.people-cards ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Featured item: full width, 50/50 grid ── */
+.people-cards .people-cards-featured {
+  flex: 0 0 100%;
   display: grid;
   grid-template-columns: 1fr;
   min-height: 420px;
-  margin-bottom: 0;
+  position: relative;
 }
 
-/* Big card - text cell */
-.people-cards > div:first-child > div:first-child {
+/* Decorative bars above and below the featured row */
+.people-cards .people-cards-featured::before,
+.people-cards .people-cards-featured::after {
+  content: '';
+  display: block;
+  height: 61px;
+  grid-column: 1 / -1;
+  background: #000;
+}
+
+.people-cards .people-cards-featured .people-cards-text {
   background: var(--big-card-bg);
   padding: 80px 60px 60px;
   display: flex;
@@ -40,199 +58,199 @@ main > .section:has(.people-cards) {
   justify-content: center;
 }
 
-.people-cards > div:first-child > div:first-child h2 {
+.people-cards .people-cards-featured .people-cards-text h2 {
   font-size: 42px;
   color: var(--big-card-heading);
   margin: 0 0 16px;
   font-weight: 400;
   line-height: 1.2;
-}
-
-.people-cards > div:first-child > div:first-child h2 a {
-  color: var(--big-card-heading);
   border-bottom: 1px solid var(--big-card-heading);
-  text-decoration: none;
+  display: inline;
 }
 
-.people-cards > div:first-child > div:first-child p {
+.people-cards .people-cards-featured .people-cards-text p {
   color: var(--big-card-text);
   font-size: 18px;
   line-height: 1.6;
-  margin: 0 0 12px;
+  margin: 16px 0 12px;
 }
 
-main .people-cards > div:first-child > div:first-child p:last-child a:any-link {
+main .people-cards .people-cards-featured .people-cards-text p:last-child a:any-link {
   color: var(--big-card-heading);
-  border: 1px solid var(--big-card-heading);
+  border: 2px solid var(--big-card-heading);
+  background: transparent;
   text-decoration: none;
-  font-size: 16px;
-  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 17px;
+  line-height: 2.4;
   display: inline-block;
   margin-top: 8px;
 }
 
-/* Big card - image cell */
-.people-cards > div:first-child > div:last-child {
+.people-cards .people-cards-featured .people-cards-image {
   min-height: 300px;
   overflow: hidden;
 }
 
-.people-cards > div:first-child > div:last-child picture {
+.people-cards .people-cards-featured .people-cards-image p,
+.people-cards .people-cards-featured .people-cards-image picture {
   display: block;
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
-.people-cards > div:first-child > div:last-child img {
+.people-cards .people-cards-featured .people-cards-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
-/* Row 2: Small cards (4-column grid) */
-.people-cards > div:nth-child(2) {
-  display: grid;
-  grid-template-columns: 1fr;
-  min-height: 350px;
-  margin-top: 0;
-}
-
-/* Small card shared styles */
-.people-cards > div:nth-child(2) > div {
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+/* ── Card items: default styles for all non-featured items ── */
+.people-cards .people-cards-card {
+  flex: 0 0 50%;
   min-height: 250px;
+  box-sizing: border-box;
 }
 
-/* Card 1: dark navy */
-.people-cards > div:nth-child(2) > div:nth-child(1) {
-  background: var(--small-card-1-bg);
+/* Card backgrounds (class-driven, not nth-child) */
+.people-cards .people-cards-navy {
+  background: var(--card-navy);
 }
 
-.people-cards > div:nth-child(2) > div:nth-child(1) h3 {
-  color: var(--card-heading-light);
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 400;
+.people-cards .people-cards-blue {
+  background: var(--card-blue);
+}
+
+.people-cards .people-cards-gray {
+  background: var(--card-gray);
+}
+
+/* Dark-bg text cards (navy, blue) */
+.people-cards .people-cards-card.people-cards-navy,
+.people-cards .people-cards-card.people-cards-blue {
+  padding: 50px;
+  color: var(--card-light-text);
+}
+
+.people-cards .people-cards-card.people-cards-navy h3,
+.people-cards .people-cards-card.people-cards-blue h3 {
+  color: var(--card-light-text);
+  font-size: 28px;
+  line-height: normal;
+  font-weight: 500;
+  letter-spacing: normal;
   margin: 0 0 16px;
 }
 
-.people-cards > div:nth-child(2) > div:nth-child(1) h3 a {
-  color: var(--card-heading-light);
+.people-cards .people-cards-card.people-cards-navy h3 a,
+.people-cards .people-cards-card.people-cards-blue h3 a {
+  color: var(--card-light-text);
   text-decoration: none;
+  border-bottom: 1px solid #4976e6;
+  padding-bottom: 2px;
 }
 
-main .people-cards > div:nth-child(2) > div:nth-child(1) p a:any-link {
+main .people-cards .people-cards-card.people-cards-navy p:last-child a:any-link,
+main .people-cards .people-cards-card.people-cards-blue p:last-child a:any-link {
   color: var(--link-yellow);
-  border-bottom: 2px solid var(--link-yellow);
+  border: 2px solid var(--link-yellow);
+  background: transparent;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 700;
+  padding: 0 17px;
+  line-height: 2.4;
+  display: inline-block;
+  margin-top: 32px;
 }
 
-/* Card 2: blue */
-.people-cards > div:nth-child(2) > div:nth-child(2) {
-  background: var(--small-card-2-bg);
+/* Light-bg text card (gray) */
+.people-cards .people-cards-card.people-cards-gray {
+  padding: 50px;
+  color: var(--card-dark-text);
 }
 
-.people-cards > div:nth-child(2) > div:nth-child(2) h3 {
-  color: var(--card-heading-light);
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 600;
-  margin: 0 0 16px;
-}
-
-.people-cards > div:nth-child(2) > div:nth-child(2) h3 a {
-  color: var(--card-heading-light);
-  text-decoration: none;
-}
-
-main .people-cards > div:nth-child(2) > div:nth-child(2) p a:any-link {
-  color: var(--link-yellow);
-  border-bottom: 2px solid var(--link-yellow);
-  text-decoration: none;
-  font-size: 14px;
-}
-
-/* Card 3: image card */
-.people-cards > div:nth-child(2) > div:nth-child(3) {
-  padding: 0;
-  overflow: hidden;
-  min-height: 300px;
-}
-
-.people-cards > div:nth-child(2) > div:nth-child(3) picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.people-cards > div:nth-child(2) > div:nth-child(3) img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Card 4: light gray (Careers) */
-.people-cards > div:nth-child(2) > div:nth-child(4) {
-  background: var(--small-card-4-bg);
-}
-
-.people-cards > div:nth-child(2) > div:nth-child(4) h3 {
-  color: var(--card-heading-dark);
-  font-size: 42px;
+.people-cards .people-cards-card.people-cards-gray h3 {
+  color: var(--card-dark-text);
+  font-size: 49px;
   line-height: 1.2;
   font-weight: 400;
   margin: 0 0 12px;
 }
 
-.people-cards > div:nth-child(2) > div:nth-child(4) h3 a {
-  color: var(--card-heading-dark);
-  border-bottom: 1px solid var(--card-heading-dark);
+.people-cards .people-cards-card.people-cards-gray h3 a {
+  color: var(--card-dark-text);
+  border-bottom: 1px solid var(--card-dark-text);
   text-decoration: none;
 }
 
-.people-cards > div:nth-child(2) > div:nth-child(4) p {
-  color: var(--card-heading-dark);
-  font-size: 14px;
+.people-cards .people-cards-card.people-cards-gray p {
+  color: var(--card-dark-text);
+  font-size: 18px;
   line-height: 1.5;
   margin: 0 0 12px;
 }
 
-main .people-cards > div:nth-child(2) > div:nth-child(4) p a:any-link {
-  color: var(--card-heading-dark);
-  background: var(--link-yellow);
+main .people-cards .people-cards-card.people-cards-gray p:last-child a:any-link {
+  color: var(--card-light-text);
+  background: var(--card-dark-text);
   border: none;
   border-radius: 0;
-  padding: 8px 20px;
+  padding: 0 17px;
+  line-height: 2.4;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 32px;
 }
 
-/* Desktop layout */
+/* Image card */
+.people-cards .people-cards-card.people-cards-image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.people-cards .people-cards-card.people-cards-image p,
+.people-cards .people-cards-card.people-cards-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.people-cards .people-cards-card.people-cards-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Desktop layout ── */
 @media (width >= 900px) {
-  .people-cards > div:first-child {
+  .people-cards .people-cards-featured {
     grid-template-columns: 1fr 1fr;
     min-height: 520px;
   }
 
-  .people-cards > div:first-child > div:first-child {
-    padding: 130px 90px 90px;
+  .people-cards .people-cards-featured::before,
+  .people-cards .people-cards-featured::after {
+    background: linear-gradient(to right, #000 50%, var(--big-card-bg) 50%);
   }
 
-  .people-cards > div:first-child > div:first-child h2 {
+  .people-cards .people-cards-featured .people-cards-text {
+    padding: 150px 90px 135px;
+  }
+
+  .people-cards .people-cards-featured .people-cards-text h2 {
     font-size: 49px;
   }
 
-  .people-cards > div:nth-child(2) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    min-height: 430px;
+  .people-cards .people-cards-card {
+    flex: 0 0 25%;
   }
 }

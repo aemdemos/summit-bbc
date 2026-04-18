@@ -1,6 +1,6 @@
 /* Purpose Statement Block */
 .purpose-statement {
-  --block-bg: rgba(0, 70, 190, 0.85);
+  --block-bg: rgb(0 70 190 / 70%);
   --block-text: #e0e6ef;
   --block-highlight: #fff000;
   --block-padding-y: 200px;
@@ -10,9 +10,9 @@
   padding: var(--block-padding-y) 0;
 }
 
-.purpose-statement-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
+main > .section > .purpose-statement-wrapper {
+  max-width: 100%;
+  padding: 0;
 }
 
 main > .section:has(.purpose-statement) {
@@ -35,7 +35,8 @@ main > .section:has(.purpose-statement) {
   margin: 0;
 }
 
-.purpose-statement h2 span {
+.purpose-statement h2 span,
+.purpose-statement h2 em {
   color: var(--block-highlight);
   font-style: normal;
 }
