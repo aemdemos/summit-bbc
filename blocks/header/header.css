@@ -1,10 +1,25 @@
 /* header and nav layout */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 header .nav-wrapper {
   background-color: #fff;
   width: 100%;
   z-index: 2;
-  position: fixed;
   border-bottom: 1px solid #e8ecef;
+  transition: background-color 0.3s;
+}
+
+header .nav-wrapper.scrolled {
+  background-color: rgb(255 255 255 / 95%);
+}
+
+header .nav-wrapper.scrolled nav {
+  height: calc(var(--nav-height) - 20px);
+  transition: height 0.3s;
 }
 
 header nav {
@@ -20,6 +35,7 @@ header nav {
   height: var(--nav-height);
   padding: 0 21px;
   font-family: var(--body-font-family);
+  transition: height 0.3s;
 }
 
 header nav[aria-expanded='true'] {
@@ -32,10 +48,6 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
   header nav,
   header nav[aria-expanded='true'] {
     display: flex;
@@ -47,6 +59,7 @@ header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
     height: 109px;
+    position: relative;
   }
 }
 
@@ -152,6 +165,14 @@ header .nav-brand {
   margin-right: auto;
 }
 
+@media (width >= 900px) {
+  header .nav-brand {
+    position: absolute;
+    left: 21px;
+    margin-right: 0;
+  }
+}
+
 header nav .nav-brand img {
   width: 116px;
   height: auto;
@@ -181,7 +202,8 @@ header nav .nav-sections ul > li {
   font-weight: 700;
 }
 
-header nav .nav-sections ul > li > a {
+header nav .nav-sections .default-content-wrapper > ul > li > a,
+header nav .nav-sections .default-content-wrapper > ul > li > p > a {
   text-transform: uppercase;
   color: #1d252c;
   letter-spacing: 0.02em;
@@ -199,24 +221,27 @@ header nav .nav-sections ul > li > ul > li > a {
   text-transform: none;
 }
 
-/* mobile dropdown */
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading {
+/* mobile mega-menu: column headings */
+header nav .nav-sections .mega-column > .mega-column-heading {
   font-weight: 700;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #8a9199;
-  padding: 16px 0 4px;
-  pointer-events: none;
+  color: #1d252c;
+  padding: 12px 0 4px;
+  display: block;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading:first-child {
-  padding-top: 8px;
+/* mobile mega-menu: sub-items */
+header nav .nav-sections .mega-column > ul {
+  margin: 0;
+  padding-left: 16px;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading a {
-  color: #8a9199;
-  cursor: default;
+header nav .nav-sections .mega-column > ul > li {
+  font-weight: 400;
+}
+
+header nav .nav-sections .mega-column > ul > li > a {
+  text-transform: none;
+  color: #1d252c;
 }
 
 @media (width >= 900px) {
@@ -234,31 +259,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-headi
 
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
     cursor: pointer;
   }
 
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.4em;
-    right: 0;
-    transform: rotate(135deg);
-    width: 5px;
-    height: 5px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.4em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
+  header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     gap: 0;
     margin: 0;
@@ -271,33 +275,54 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-headi
     padding: 0 18px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  /* invisible hover bridge — covers the gap between nav item and dropdown */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -12px;
+    width: 984px;
+    height: 20px;
     display: none;
-    position: relative;
   }
 
-  /* mega-menu dropdown */
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover::after {
+    display: block;
+  }
+
+  /* hide dropdown by default — use visibility/opacity for transition */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: flex;
     position: absolute;
     left: -12px;
-    width: 620px;
-    top: 150%;
-    padding: 20px 24px;
+    width: 984px;
+    top: calc(100% + 12px);
+    padding: 12px 0 20px 20px;
     background-color: #212331;
     white-space: initial;
     box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
     border-radius: 0;
     z-index: 10;
-    gap: 0 24px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s 0.3s, opacity 0.3s 0.3s;
+    pointer-events: none;
+  }
+
+  /* show on hover — instant appear, delayed disappear */
+  header nav .nav-sections .default-content-wrapper > ul > li:hover > ul,
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: visibility 0s, opacity 0.4s;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
     content: '';
     position: absolute;
     top: -8px;
-    left: 24px;
+    left: 60px;
     width: 0;
     height: 0;
     border-left: 8px solid transparent;
@@ -305,59 +330,71 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-headi
     border-bottom: 8px solid #212331;
   }
 
-  /* mega-menu column headings */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading {
-    grid-column-start: auto;
-    font-weight: 700;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #8a9199;
-    padding: 0 0 8px;
-    pointer-events: none;
+  /* mega-menu columns — each .mega-column is a flex child */
+  header nav .nav-sections .mega-column {
+    flex: 0 0 300px;
+    display: block;
+    padding: 0;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading:first-child {
-    padding-top: 0;
-  }
-
-  /* mega-menu column break: each heading starts a new column */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-col-start {
-    grid-column-start: auto;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 4px 0;
-    grid-column: 1;
-  }
-
-  /* column 1: Corporate Responsibility */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li[data-col="1"] {
-    grid-column: 1;
-  }
-
-  /* column 2: People */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li[data-col="2"] {
-    grid-column: 2;
-  }
-
-  /* column 3: Company */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li[data-col="3"] {
-    grid-column: 3;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
-    font-size: 14px;
-    color: #e0e6ef;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover {
+  /* column headings (plain text, not links) */
+  header nav .nav-sections .mega-column > .mega-column-heading {
+    display: block;
     color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 20px 12px 12px 20px;
+    margin: 0 20px 0 27px;
+    border-bottom: 1px solid #494660;
+    text-transform: none;
+    letter-spacing: normal;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-heading a {
-    color: #8a9199;
-    cursor: default;
+  /* column sub-items list — must be block, not flex */
+  header nav .nav-sections .mega-column > ul {
+    display: block;
+    margin: 0;
+    padding: 8px 0 0;
+    list-style: none;
+  }
+
+  /* column sub-item li */
+  header nav .nav-sections .mega-column > ul > li {
+    display: block;
+    padding: 0;
+    font-weight: 400;
+  }
+
+  /* column sub-item links — with arrow indicator */
+  header nav .nav-sections .mega-column > ul > li > a {
+    display: block;
+    position: relative;
+    color: #e0e6ef;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 12px 8px 47px;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  /* arrow chevron before each sub-item */
+  header nav .nav-sections .mega-column > ul > li > a::before {
+    content: '›';
+    position: absolute;
+    left: 27px;
+    top: 8px;
+    color: #e0e6ef;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  header nav .nav-sections .mega-column > ul > li > a:hover {
+    background: #000;
+    color: #fff200;
+  }
+
+  header nav .nav-sections .mega-column > ul > li > a:hover::before {
+    color: #fff200;
   }
 }
 
@@ -365,15 +402,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li.mega-headi
 header nav .nav-tools {
   grid-area: tools;
   flex-shrink: 0;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 header nav .nav-tools .search-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
   cursor: pointer;
 }
 

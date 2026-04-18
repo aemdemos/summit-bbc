@@ -14,16 +14,16 @@
 
 :root {
   /* colors */
-  --background-color: rgb(240, 243, 242);
-  --light-color: rgb(249, 249, 249);
+  --background-color: rgb(240 243 242);
+  --light-color: rgb(249 249 249);
   --dark-color: #505050;
-  --text-color: rgb(0, 0, 0);
-  --link-color: rgb(0, 70, 190);
-  --link-hover-color: rgb(42, 100, 150);
+  --text-color: rgb(0 0 0);
+  --link-color: rgb(0 70 190);
+  --link-hover-color: rgb(42 100 150);
 
   /* fonts */
-  --body-font-family: "Source Sans Pro", "HumanBBYDigital-Regular", sans-serif;
-  --heading-font-family: "Montserrat", "HumanBBYDigital-Medium", sans-serif;
+  --body-font-family: humanbbydigital, "Source Sans Pro", sans-serif;
+  --heading-font-family: humanbbydigital, "Montserrat", sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -43,6 +43,7 @@
 }
 
 main .button-container { display: inline; }
+
 main a.button:any-link {
   background: none; border: none; border-radius: 0;
   color: var(--link-color); font-size: inherit; font-weight: inherit;

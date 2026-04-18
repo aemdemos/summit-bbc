@@ -1,32 +1,23 @@
 export default async function decorate(block) {
   const rows = [...block.children];
 
-  // Row 1: Tag + Heading - mark the tag paragraph
+  // Row 1: Featured card (image + text) — add class, leave structure intact
   if (rows[0]) {
-    const cells = [...rows[0].children];
-    if (cells[0]) {
-      const tagP = cells[0].querySelector('p');
-      if (tagP) tagP.classList.add('tag');
-    }
-    // Merge cells into one div for centering
-    if (cells.length > 1) {
-      const content = document.createElement('div');
-      cells.forEach((cell) => {
-        content.append(...cell.childNodes);
-      });
-      rows[0].replaceChildren(content);
-    }
+    rows[0].classList.add('co-featured');
   }
 
-  // Row 2: Image + Featured card - already structured correctly
-  // Row 3: Three quickfinder cards - already structured correctly
-
-  // Add dot class to the period in the heading
-  const heading = block.querySelector('h2');
-  if (heading) {
-    const dot = heading.querySelector('.dot');
-    if (!dot) {
-      heading.innerHTML = heading.innerHTML.replace(/\.$/, '<span class="dot">.</span>');
-    }
+  // Rows 2+: Quickfinder cards — collect all cells into a flat grid
+  const quickfinderRows = rows.slice(1);
+  if (quickfinderRows.length) {
+    const grid = document.createElement('div');
+    grid.classList.add('co-quickfinder-grid');
+    quickfinderRows.forEach((row) => {
+      [...row.children].forEach((cell) => {
+        cell.classList.add('co-quickfinder-card');
+        grid.append(cell);
+      });
+      row.remove();
+    });
+    block.append(grid);
   }
 }

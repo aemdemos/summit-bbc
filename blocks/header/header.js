@@ -148,8 +148,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
- * Organizes mega-menu dropdown items into columns based on section headers.
- * Items with href="#" that have no nested content are treated as column headings.
+ * Restructures a flat mega-menu list into nested 3-column layout.
+ * Plain-text li items (no link) are treated as column headings.
+ * Link li items below a heading become children of that column.
  * @param {Element} navSections The nav sections element
  */
 function decorateMegaMenu(navSections) {
@@ -157,18 +158,48 @@ function decorateMegaMenu(navSections) {
     const subList = navItem.querySelector('ul');
     if (!subList) return;
 
-    let colIndex = 0;
-    [...subList.children].forEach((li) => {
-      const link = li.querySelector('a');
-      if (!link) return;
+    const items = [...subList.children];
+    const columns = [];
+    let currentCol = null;
 
-      // Items linking to "#" with no sub-list are section headings
-      const isHeading = link.getAttribute('href') === '#' && !li.querySelector('ul');
-      if (isHeading) {
-        colIndex += 1;
-        li.classList.add('mega-heading', 'mega-col-start');
+    items.forEach((li) => {
+      const link = li.querySelector('a');
+      if (!link) {
+        // Plain text li (no link) = column heading
+        currentCol = { headingText: li.textContent.trim(), items: [] };
+        columns.push(currentCol);
+      } else {
+        const href = link.getAttribute('href');
+        // EDS converts plain text and "#" to href="/" — treat as heading
+        if (href === '#' || href === '/') {
+          currentCol = { headingText: link.textContent.trim(), items: [] };
+          columns.push(currentCol);
+        } else if (currentCol) {
+          currentCol.items.push(li);
+        }
       }
-      li.setAttribute('data-col', String(colIndex));
+    });
+
+    if (columns.length === 0) return;
+
+    // Rebuild the sub-list as nested columns
+    subList.textContent = '';
+    columns.forEach((col) => {
+      const colLi = document.createElement('li');
+      colLi.classList.add('mega-column');
+
+      // Create a span for the heading text (not a link)
+      const heading = document.createElement('span');
+      heading.classList.add('mega-column-heading');
+      heading.textContent = col.headingText;
+      colLi.append(heading);
+
+      // Create sub-ul for column items
+      const colUl = document.createElement('ul');
+      col.items.forEach((item) => colUl.append(item));
+      colLi.append(colUl);
+
+      subList.append(colLi);
     });
   });
 }
@@ -251,7 +282,7 @@ export default async function decorate(block) {
       });
     });
 
-    // organize mega-menu columns
+    // restructure flat mega-menu into 3-column nested layout
     decorateMegaMenu(navSections);
   }
 
@@ -276,4 +307,9 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Toggle semi-transparent background when scrolled
+  window.addEventListener('scroll', () => {
+    navWrapper.classList.toggle('scrolled', window.scrollY > 0);
+  });
 }

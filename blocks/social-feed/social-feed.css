@@ -8,9 +8,15 @@
   --sf-padding: 100px;
 }
 
-.social-feed-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
+main > .section.social-feed-container {
+  margin: 0;
+  overflow: hidden;
+}
+
+main > .section > .social-feed-wrapper {
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
 }
 
 .social-feed-wrapper.social-feed-wrapper {
@@ -20,6 +26,7 @@
 .social-feed > div {
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 }
 
 .social-feed > div > div:first-child {
@@ -28,12 +35,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .social-feed > div > div:last-child {
   flex: 1;
   min-height: 250px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .social-feed > div > div:last-child picture {
@@ -73,8 +82,10 @@ main .social-feed a:any-link {
   font-weight: 800;
   font-family: var(--heading-font-family, sans-serif);
   text-decoration: none;
-  line-height: 1.1;
+  border-bottom: 1px solid #e0e6ef;
+  line-height: normal;
   display: inline-block;
+  margin-left: 55px;
   transition: color 0.2s ease;
 }
 
