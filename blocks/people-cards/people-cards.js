@@ -47,6 +47,7 @@ export default async function decorate(block) {
           li.classList.add('people-cards-text', CARD_BG_LIGHT);
         } else {
           // Text card with heading + link only = dark bg
+          // eslint-disable-next-line secure-coding/detect-object-injection
           li.classList.add('people-cards-text', CARD_BG_DARK[darkIndex % CARD_BG_DARK.length]);
           darkIndex += 1;
         }

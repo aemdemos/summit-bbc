@@ -83,6 +83,7 @@ function createSocialIcon(name) {
   };
 
   if (!Object.hasOwn(paths, name)) return null;
+  // eslint-disable-next-line secure-coding/detect-object-injection
   path.setAttribute('d', paths[name]);
   svg.append(path);
   return svg;

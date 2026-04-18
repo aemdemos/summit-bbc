@@ -7,6 +7,7 @@ export default async function decorate(block) {
 
   // Find the CTA link (last link in the text cell)
   const links = textCell.querySelectorAll('a[href]');
+  // eslint-disable-next-line secure-coding/detect-object-injection
   const ctaLink = links.length > 0 ? links[links.length - 1] : null;
   if (!ctaLink) return;
 
